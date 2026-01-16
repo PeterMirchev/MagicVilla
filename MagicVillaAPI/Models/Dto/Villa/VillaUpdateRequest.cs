@@ -1,4 +1,4 @@
-﻿namespace MagicVillaAPI.Models.Dto;
+﻿namespace MagicVillaAPI.Models.Dto.Villa;
 
 public class VillaUpdateRequest
 {
