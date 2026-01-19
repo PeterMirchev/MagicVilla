@@ -19,7 +19,7 @@ namespace MagicVillaAPI.Services
 
         public async Task<Villa?> GetVillaAsync(Guid id)
         {
-            return await _repository.GetAsync(id)
+            return await _repository.GetByIdAsync(id)
                    ?? throw new KeyNotFoundException($"Villa with id {id} not found");
         }
 

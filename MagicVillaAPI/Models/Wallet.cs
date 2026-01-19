@@ -12,5 +12,7 @@ namespace MagicVillaAPI.Models
         public decimal Balance { get; set; }
         [Required]
         public string Currency { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime UpdatedOn { get; set; }
     }
 }

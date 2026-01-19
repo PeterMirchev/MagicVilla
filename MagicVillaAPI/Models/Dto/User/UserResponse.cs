@@ -1,16 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace MagicVillaAPI.Models
+﻿namespace MagicVillaAPI.Models.Dto.User
 {
-    public class User
+    public class UserResponse
     {
-        [Key]
         public Guid Id { get; set; }
-        [Required]
         public string Username { get; set; }
-        [Required]
         public string Email { get; set; }
-        public ICollection<Wallet> Wallets { get; set; } = new List<Wallet>();
         public bool IsActive { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }

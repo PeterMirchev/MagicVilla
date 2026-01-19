@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MagicVillaAPI.Repositories;
 
-public class VillaRepository : IVillaRepository
+public class VillaRepository : IWalletRepository
 {
     private readonly AppDbContext _db;
 
@@ -13,33 +13,5 @@ public class VillaRepository : IVillaRepository
         _db = db;
     }
     
-    public async Task<IEnumerable<Villa>> GetAllAsync()
-    {
-        return await _db.Villas.ToListAsync();
-    }
-
-    public async Task<Villa?> GetAsync(Guid id)
-    {
-        return await _db.Villas.FindAsync(id);
-    }
-
-    public async Task<Villa> CreateAsync(Villa villa)
-    {
-        _db.Villas.Add(villa);
-        await _db.SaveChangesAsync();
-        return villa;
-    }
-
-    public async Task<Villa> UpdateAsync(Villa villa)
-    {
-        _db.Villas.Update(villa); 
-        await _db.SaveChangesAsync();
-        return villa;
-    }
-
-    public async Task DeleteAsync(Villa villa)
-    {
-        _db.Villas.Remove(villa);
-        await _db.SaveChangesAsync();
-    }
+  
 }
