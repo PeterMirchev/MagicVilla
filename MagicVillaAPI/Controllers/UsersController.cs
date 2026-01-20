@@ -1,5 +1,4 @@
-﻿using System.Net;
-using AutoMapper;
+﻿using AutoMapper;
 using MagicVillaAPI.Models.Dto.User;
 using MagicVillaAPI.Services;
 using MagicVillaAPI.Models;
@@ -9,12 +8,12 @@ namespace MagicVillaAPI.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class UserController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public UserController(IUserService userService, IMapper mapper)
+        public UsersController(IUserService userService, IMapper mapper)
         {
             _userService = userService;
             _mapper = mapper;
@@ -27,7 +26,7 @@ namespace MagicVillaAPI.Controllers
         {
             var user = await _userService.CreateUserAsync(request);
             var response = _mapper.Map<UserResponse>(user);
-            return Created($"/api/v1/user/{user.Id}", response);
+            return Created($"/api/v1/users/{user.Id}", response);
         }
 
         [HttpGet("{id}")]
@@ -62,20 +61,11 @@ namespace MagicVillaAPI.Controllers
             return Ok(response);
         }
 
-        [HttpDelete("{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> DisableUserAsync(Guid id)
-        {
-            await _userService.DisableUserAsync(id);
-            
-            return NoContent();
-        }
-
         [HttpPatch("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<UserResponse>> EnableUserAsync(Guid id)
+        public async Task<ActionResult<UserResponse>> EnableUserAsync(Guid id, [FromBody] EnableDisableUserRequest request)
         {
-            User user = await _userService.EnableUserAsync(id);
+            User user = await _userService.EnableDisableUserAsync(id, request);
             var response = _mapper.Map<UserResponse>(user);
 
             return Ok(response);

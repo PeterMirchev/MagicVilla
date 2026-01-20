@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MagicVillaAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260116154711_AddUserAndWallet")]
-    partial class AddUserAndWallet
+    [Migration("20260120125147_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,9 +31,18 @@ namespace MagicVillaAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Username")
                         .IsRequired()
@@ -71,6 +80,9 @@ namespace MagicVillaAPI.Migrations
                     b.Property<decimal>("Balance")
                         .HasColumnType("numeric");
 
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("timestamp with time zone");
+
                     b.Property<string>("Currency")
                         .IsRequired()
                         .HasColumnType("text");
@@ -79,7 +91,10 @@ namespace MagicVillaAPI.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<DateTime>("UpdatedOn")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
@@ -91,9 +106,13 @@ namespace MagicVillaAPI.Migrations
 
             modelBuilder.Entity("MagicVillaAPI.Models.Wallet", b =>
                 {
-                    b.HasOne("MagicVillaAPI.Models.User", null)
+                    b.HasOne("MagicVillaAPI.Models.User", "User")
                         .WithMany("Wallets")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MagicVillaAPI.Models.User", b =>

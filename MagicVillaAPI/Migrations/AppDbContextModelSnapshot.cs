@@ -91,7 +91,7 @@ namespace MagicVillaAPI.Migrations
                     b.Property<DateTime>("UpdatedOn")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<Guid?>("UserId")
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
@@ -103,9 +103,13 @@ namespace MagicVillaAPI.Migrations
 
             modelBuilder.Entity("MagicVillaAPI.Models.Wallet", b =>
                 {
-                    b.HasOne("MagicVillaAPI.Models.User", null)
+                    b.HasOne("MagicVillaAPI.Models.User", "User")
                         .WithMany("Wallets")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("MagicVillaAPI.Models.User", b =>

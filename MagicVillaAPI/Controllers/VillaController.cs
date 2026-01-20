@@ -8,13 +8,13 @@ namespace MagicVillaAPI.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]
-public class VillaController : ControllerBase
+public class VillasController : ControllerBase
 {
 
     private readonly IVillaService _villaService;
     private readonly IMapper _mapper;
 
-    public VillaController(IVillaService villaService, IMapper mapper)
+    public VillasController(IVillaService villaService, IMapper mapper)
     {
         _villaService = villaService;
         _mapper = mapper;
@@ -53,7 +53,7 @@ public class VillaController : ControllerBase
         var villa = await _villaService.CreateVillaAsync(request);
         var response = _mapper.Map<VillaResponse>(villa);
         
-        return Created($"/api/v1/villa/{villa.Id}", response);
+        return Created($"/api/v1/villas/{villa.Id}", response);
     }
 
     [HttpPut("{id}")]

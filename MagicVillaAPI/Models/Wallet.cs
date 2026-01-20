@@ -6,12 +6,21 @@ namespace MagicVillaAPI.Models
     {
         [Key]
         public Guid Id { get; set; }
+
         [Required]
         public string Name { get; set; }
+
         [Required]
         public decimal Balance { get; set; }
+
         [Required]
         public string Currency { get; set; }
+
+        [Required]
+        public Guid UserId { get; set; }
+
+        public User User { get; set; }
+
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
     }

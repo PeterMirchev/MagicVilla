@@ -10,7 +10,6 @@ namespace MagicVillaAPI.Services
         public Task<IEnumerable<User>> GetAllUsersAsync();
         public Task<User> GetUserByIdAsync(Guid id);
         public Task<User?> GetUserByUsernameAsync(string username);
-        public Task DisableUserAsync(Guid id);
-        Task<User> EnableUserAsync(Guid id);
+        Task<User> EnableDisableUserAsync(Guid id, EnableDisableUserRequest request);
     }
 }

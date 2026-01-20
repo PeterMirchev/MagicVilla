@@ -15,8 +15,8 @@ public class AppDbContext : DbContext
     {
         modelBuilder.Entity<User>()
             .HasMany(u => u.Wallets)
-            .WithOne()
-            .HasForeignKey("UserId");
+            .WithOne(w => w.User)
+            .HasForeignKey(w => w.UserId);
     }
 
     public DbSet<Villa> Villas { get; set; }

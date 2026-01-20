@@ -54,17 +54,10 @@ namespace MagicVillaAPI.Services
             return await _userRepository.UpdateAsync(user);
         }
 
-        public async Task DisableUserAsync(Guid id)
-        {
-            var user = await GetUserByIdAsync(id);
-            user.IsActive = false;
-            await _userRepository.DisableUserAsync(user);
-        }
-
-        public async Task<User> EnableUserAsync(Guid id)
+        public async Task<User> EnableDisableUserAsync(Guid id, EnableDisableUserRequest request)
         {
             User user = await GetUserByIdAsync(id);
-            user.IsActive = true;
+            user.IsActive = request.elabled;
             user.UpdatedOn = DateTime.UtcNow;
             await _userRepository.UpdateAsync(user);
 

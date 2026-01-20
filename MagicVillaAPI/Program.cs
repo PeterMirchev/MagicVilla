@@ -16,6 +16,8 @@ builder.Services.AddScoped<IVillaRepository, VillaRepository>();
 builder.Services.AddScoped<IVillaService, VillaService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IWalletRepository, WalletRepository>();
+builder.Services.AddScoped<IWalletService, WalletService>();
 builder.Services.AddAutoMapper(cfg =>
     cfg.AddProfile(new VillaMappingProfile()));
 

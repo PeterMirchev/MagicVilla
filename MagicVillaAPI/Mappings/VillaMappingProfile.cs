@@ -2,6 +2,7 @@
 using MagicVillaAPI.Models;
 using MagicVillaAPI.Models.Dto.User;
 using MagicVillaAPI.Models.Dto.Villa;
+using MagicVillaAPI.Models.Dto.Wallet;
 
 namespace MagicVillaAPI.Mappings;
 
@@ -16,5 +17,9 @@ public class VillaMappingProfile : Profile
         CreateMap<UserCreateRequest, User>();
         CreateMap<UserUpdateRequest, User>();
         CreateMap<User, UserResponse>();
+
+        CreateMap<WalletCreateRequest, Wallet>();
+        CreateMap<WalletUpdateRequest, Wallet>();
+        CreateMap<Wallet, WalletResponse>();
     }
 }
