@@ -1,3 +1,4 @@
+using Asp.Versioning;
 using MagicVillaAPI.Data;
 using MagicVillaAPI.Filters;
 using MagicVillaAPI.Mappings;
@@ -20,6 +21,13 @@ builder.Services.AddScoped<IWalletRepository, WalletRepository>();
 builder.Services.AddScoped<IWalletService, WalletService>();
 builder.Services.AddAutoMapper(cfg =>
     cfg.AddProfile(new VillaMappingProfile()));
+builder.Services.AddApiVersioning(setupAction =>
+{
+    setupAction.ReportApiVersions = true;
+    setupAction.AssumeDefaultVersionWhenUnspecified = true;
+    setupAction.DefaultApiVersion = new ApiVersion(1, 0);
+}).AddMvc();
+
 
 // Add Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();

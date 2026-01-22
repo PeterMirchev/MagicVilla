@@ -8,16 +8,22 @@ namespace MagicVillaAPI.Services
     public class WalletService : IWalletService
     {
         private readonly IWalletRepository _walletRepository;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public WalletService(IWalletRepository walletRepository, IMapper mapper)
+        public WalletService(IWalletRepository walletRepository,
+            IUserService userService,
+            IMapper mapper)
         {
             _walletRepository = walletRepository;
+            _userService = userService;
             _mapper = mapper;
         }
 
         public async Task<Wallet> CreateWalletAsync(WalletCreateRequest request)
         {
+            await _userService.GetUserByIdAsync(request.UserId);
+
             Wallet wallet = _mapper.Map<Wallet>(request);
             wallet.Balance = 0;
             wallet.CreatedOn = DateTime.UtcNow;

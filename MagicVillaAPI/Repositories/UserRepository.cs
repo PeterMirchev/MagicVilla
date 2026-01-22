@@ -21,17 +21,23 @@ namespace MagicVillaAPI.Repositories
 
         public async Task<IEnumerable<User>> GetAllAsync()
         {
-            return await _db.Users.ToListAsync();
+            return await _db.Users
+                .Include(u => u.Wallets)
+                .ToListAsync();
         }
 
         public async Task<User?> GetByUsernameAsync(string username)
         {
-            return await _db.Users.FirstOrDefaultAsync(u => u.Username == username);
+            return await _db.Users
+                .Include(u => u.Wallets)
+                .FirstOrDefaultAsync(u => u.Username == username);
         }
 
         public async Task<User?> GetByIdAsync(Guid id)
         {
-            return await _db.Users.FindAsync(id);
+            return await _db.Users
+                .Include(u => u.Wallets)
+                .FirstOrDefaultAsync(u => u.Id == id);
         }
 
         public async Task<User> UpdateAsync(User user)

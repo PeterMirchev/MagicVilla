@@ -3,11 +3,13 @@ using MagicVillaAPI.Models.Dto.User;
 using MagicVillaAPI.Services;
 using MagicVillaAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Asp.Versioning;
 
 namespace MagicVillaAPI.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
+    [ApiVersion(1)]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;

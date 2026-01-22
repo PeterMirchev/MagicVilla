@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Asp.Versioning;
+using AutoMapper;
 using MagicVillaAPI.Models.Dto.Villa;
 using MagicVillaAPI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ namespace MagicVillaAPI.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]
+[ApiVersion(1)]
 public class VillasController : ControllerBase
 {
 
