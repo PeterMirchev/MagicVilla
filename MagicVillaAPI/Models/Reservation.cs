@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using MagicVillaAPI.Models;
 
 namespace MagicVillaAPI.Models;
 public class Reservation
@@ -7,11 +6,14 @@ public class Reservation
     [Key]
     public Guid Id { get; set; }
     [Required]
+    public string Note { get; set; }
     public int Days { get; set; }
     [Required]
     public DateTime From { get; set; }
     [Required]
     public DateTime To { get; set; }
+    
+    public decimal Price { get; set; }
 
     [Required]
     public Guid UserId { get; set; }

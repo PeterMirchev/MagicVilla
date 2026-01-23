@@ -3,6 +3,7 @@ using System;
 using MagicVillaAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MagicVillaAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260123092908_AddNotesForReservation")]
+    partial class AddNotesForReservation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,9 +43,6 @@ namespace MagicVillaAPI.Migrations
                     b.Property<string>("Note")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("numeric");
 
                     b.Property<DateTime>("To")
                         .HasColumnType("timestamp with time zone");
@@ -105,9 +105,6 @@ namespace MagicVillaAPI.Migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<decimal>("PricePerDay")
-                        .HasColumnType("numeric");
 
                     b.HasKey("Id");
 
