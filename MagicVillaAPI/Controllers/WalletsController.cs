@@ -1,6 +1,5 @@
 ﻿using Asp.Versioning;
 using AutoMapper;
-using MagicVillaAPI.Models;
 using MagicVillaAPI.Models.Dto.Wallet;
 using MagicVillaAPI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -13,16 +12,14 @@ namespace MagicVillaAPI.Controllers
     public class WalletsController : ControllerBase
     {
         private readonly IWalletService _walletService;
-        private readonly IUserService _userService;
         private readonly IMapper _mapper;
+
 
         public WalletsController(
             IWalletService walletService,
-            IUserService userService,
             IMapper mapper)
         {
             _walletService = walletService;
-            _userService = userService;
             _mapper = mapper;
         }
 
@@ -57,6 +54,5 @@ namespace MagicVillaAPI.Controllers
 
             return Ok(response);
         }
-
     }
 }
