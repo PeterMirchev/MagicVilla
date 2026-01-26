@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MagicVillaAPI.Models;
+using MagicVillaAPI.Models.Dto.Reservation;
 using MagicVillaAPI.Models.Dto.User;
 using MagicVillaAPI.Models.Dto.Villa;
 using MagicVillaAPI.Models.Dto.Wallet;
@@ -21,5 +22,9 @@ public class VillaMappingProfile : Profile
         CreateMap<WalletCreateRequest, Wallet>();
         CreateMap<WalletUpdateRequest, Wallet>();
         CreateMap<Wallet, WalletResponse>();
+
+        CreateMap<ReservationCreateRequest, Reservation>();
+        CreateMap<ReservationUpdateRequest, Reservation>();
+        CreateMap<Reservation, ReservationResponse>();
     }
 }

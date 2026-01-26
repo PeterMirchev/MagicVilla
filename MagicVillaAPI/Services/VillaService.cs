@@ -17,7 +17,7 @@ namespace MagicVillaAPI.Services
             _mapper = mapper;
         }
 
-        public async Task<Villa?> GetVillaAsync(Guid id)
+        public async Task<Villa?> GetVillaByIdAsync(Guid id)
         {
             return await _repository.GetByIdAsync(id)
                    ?? throw new KeyNotFoundException($"Villa with id {id} not found");
@@ -38,14 +38,14 @@ namespace MagicVillaAPI.Services
 
         public async Task<Villa> UpdateVillaAsync(VillaUpdateRequest request, Guid id)
         {
-            var villa = await GetVillaAsync(id);
+            var villa = await GetVillaByIdAsync(id);
             _mapper.Map(request, villa);
             return await _repository.UpdateAsync(villa);
         }
 
         public async Task DeleteVillaAsync(Guid id)
         {
-            var villa = await GetVillaAsync(id);
+            var villa = await GetVillaByIdAsync(id);
             await _repository.DeleteAsync(villa); 
         }
     }

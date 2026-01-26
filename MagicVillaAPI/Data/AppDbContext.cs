@@ -31,7 +31,6 @@ public class AppDbContext : DbContext
             .WithOne(r => r.Villa)
             .HasForeignKey(r => r.VillaId);
     }
-
     public DbSet<Villa> Villas { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Wallet> Wallets { get; set; }

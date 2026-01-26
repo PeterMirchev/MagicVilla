@@ -42,7 +42,7 @@ public class VillasController : ControllerBase
             return BadRequest();
         }
 
-        var villa = await _villaService.GetVillaAsync(id);
+        var villa = await _villaService.GetVillaByIdAsync(id);
         var response = _mapper.Map<VillaResponse>(villa);
         return Ok(response);
     }

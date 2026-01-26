@@ -13,35 +13,33 @@ public class VillaRepository : IVillaRepository
         _db = db;
     }
 
-    public async Task<Wallet> CreateAsync(Wallet wallet)
+    public async Task<Villa> CreateAsync(Villa villa)
     {
-        _db.Wallets.Add(wallet);
-        await  _db.SaveChangesAsync();
-        return wallet;
+        _db.Villas.Add(villa);
+        await _db.SaveChangesAsync();
+        return villa;
     }
 
-    public Task<Villa> CreateAsync(Villa villa)
+    public async Task DeleteAsync(Villa villa)
     {
-        throw new NotImplementedException();
+        _db.Villas.Remove(villa);
+        await _db.SaveChangesAsync();
     }
 
-    public Task DeleteAsync(Villa villa)
+    public async Task<IEnumerable<Villa>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        return await _db.Villas.ToListAsync();
     }
 
-    public Task<IEnumerable<Villa>> GetAllAsync()
+    public async Task<Villa> UpdateAsync(Villa villa)
     {
-        throw new NotImplementedException();
+        _db.Villas.Update(villa);
+        await _db.SaveChangesAsync();
+        return villa;
     }
 
-    public Task<Villa> UpdateAsync(Villa villa)
+    async Task<Villa?> IVillaRepository.GetByIdAsync(Guid id)
     {
-        throw new NotImplementedException();
-    }
-
-    Task<Villa?> IVillaRepository.GetByIdAsync(Guid id)
-    {
-        throw new NotImplementedException();
+        return await _db.Villas.FirstOrDefaultAsync(v => v.Id == id);
     }
 }

@@ -5,7 +5,7 @@ namespace MagicVillaAPI.Services;
 
 public interface IVillaService
 {
-    public Task<Villa?> GetVillaAsync(Guid id);
+    public Task<Villa?> GetVillaByIdAsync(Guid id);
     
     public Task<List<Villa>> GetAllVillasAsync();
     
