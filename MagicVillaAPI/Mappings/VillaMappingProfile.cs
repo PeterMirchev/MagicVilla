@@ -23,7 +23,9 @@ public class VillaMappingProfile : Profile
         CreateMap<WalletUpdateRequest, Wallet>();
         CreateMap<Wallet, WalletResponse>();
 
-        CreateMap<ReservationCreateRequest, Reservation>();
+        CreateMap<ReservationCreateRequest, Reservation>()
+             .ForMember(dest => dest.From, opt => opt.MapFrom(src => src.From.ToDateTime(TimeOnly.MinValue)))
+             .ForMember(dest => dest.To, opt => opt.MapFrom(src => src.To.ToDateTime(TimeOnly.MinValue)));
         CreateMap<ReservationUpdateRequest, Reservation>();
         CreateMap<Reservation, ReservationResponse>();
     }

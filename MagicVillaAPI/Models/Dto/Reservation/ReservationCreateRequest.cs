@@ -6,9 +6,9 @@ namespace MagicVillaAPI.Models.Dto.Reservation
     {
         public string Note { get; set; }
         [Required(ErrorMessage = "Starting date is required")]
-        public DateTime From { get; set; }
+        public DateOnly From { get; set; }
         [Required(ErrorMessage = "Ending date is required")]
-        public DateTime To { get; set; }
+        public DateOnly To { get; set; }
         [Required(ErrorMessage = "User ID is required")]
         public Guid UserId { get; set; }
         [Required(ErrorMessage = "Villa ID is required")]
