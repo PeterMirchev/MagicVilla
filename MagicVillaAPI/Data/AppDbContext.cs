@@ -30,10 +30,13 @@ public class AppDbContext : DbContext
             .HasMany(v => v.Reservations)
             .WithOne(r => r.Villa)
             .HasForeignKey(r => r.VillaId);
+
+        modelBuilder.Entity<AuditRecord>();
     }
     public DbSet<Villa> Villas { get; set; }
     public DbSet<User> Users { get; set; }
     public DbSet<Wallet> Wallets { get; set; }
     public DbSet<Reservation> Reservations { get; set; }
+    public DbSet<AuditRecord> AuditRecords { get; set; }
     
 }

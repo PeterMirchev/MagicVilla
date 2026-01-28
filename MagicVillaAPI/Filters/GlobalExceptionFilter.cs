@@ -6,6 +6,13 @@ namespace MagicVillaAPI.Filters;
 
 public class GlobalExceptionFilter : IExceptionFilter
 {
+    private readonly ILogger<GlobalExceptionFilter> _logger;
+
+    public GlobalExceptionFilter(ILogger<GlobalExceptionFilter> logger)
+    {
+        _logger = logger;
+    }
+
     public void OnException(ExceptionContext context)
     {
         int statusCode;
@@ -27,6 +34,7 @@ public class GlobalExceptionFilter : IExceptionFilter
                 break;
         }
 
+        _logger.LogError(context.Exception, "Unhandled exception occurred: {Message}", context.Exception.Message);
         var errorResponse = new
         {
             StatusCode = statusCode,

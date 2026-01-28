@@ -11,16 +11,18 @@ namespace MagicVillaAPI.Services
         private readonly IUserService _userService;
         private readonly IVillaService _villaService;
         private readonly IMapper _mapper;
-
+        private readonly ILogger<ReservationService> _logger;
         public ReservationService(IReservationRepository reservationRepository,
-            IUserService userService, 
+            IUserService userService,
             IVillaService villaService,
-            IMapper mapper)
+            IMapper mapper,
+            ILogger<ReservationService> logger)
         {
             _reservationRepository = reservationRepository;
             _userService = userService;
             _villaService = villaService;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<Reservation> CreateReservationAsync(ReservationCreateRequest request)
@@ -35,12 +37,18 @@ namespace MagicVillaAPI.Services
             CalculateReservationDays(reservation);
             reservation.Price = villa.PricePerDay * reservation.Days;
 
-            return await _reservationRepository.CreateAsync(reservation);
+            var persistedReservation = await _reservationRepository.CreateAsync(reservation);
+
+            _logger.LogInformation("Reservation created. ReservationId={ReservationId}, UserId={UserId}",
+                persistedReservation.Id, persistedReservation.UserId);
+
+            return persistedReservation;
         }
 
-        public Task DeleteReservationByIdAsync(Guid reservationId)
+        public async Task DeleteReservationByIdAsync(Guid reservationId)
         {
-            throw new NotImplementedException();
+            await _reservationRepository.DeleteAsync(reservationId);
+            _logger.LogInformation($"Reservation with ID '{reservationId}' successfully deleted.");
         }
 
         public async Task<IEnumerable<Reservation>> GetAllReservationsByUserIdAsync(Guid userId)

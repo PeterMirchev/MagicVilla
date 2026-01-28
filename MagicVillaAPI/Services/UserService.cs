@@ -8,10 +8,12 @@ namespace MagicVillaAPI.Services
     public class UserService : IUserService
     {
         private readonly IUserRepository _userRepository;
+        private readonly IAuditRecordService _auditRecordService;
         private readonly IMapper _mapper;
-        public UserService(IUserRepository userRepository, IMapper mapper)
+        public UserService(IUserRepository userRepository, IAuditRecordService auditRecordService, IMapper mapper)
         {
             _userRepository = userRepository;
+            _auditRecordService = auditRecordService;
             _mapper = mapper;
         }
 
@@ -22,7 +24,12 @@ namespace MagicVillaAPI.Services
             user.CreatedOn = DateTime.UtcNow;
             user.UpdatedOn = DateTime.UtcNow;
 
-            return await _userRepository.CreateAsync(user);
+            await _userRepository.CreateAsync(user);
+
+            string Details = "User successfully registered.";
+            await _auditRecordService.CreateAsync(user, ActionType.USER_REGISTRATION, user.Id, DateTime.UtcNow, Details);
+
+            return user;
         }
 
         public async Task<IEnumerable<User>> GetAllUsersAsync()

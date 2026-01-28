@@ -55,7 +55,7 @@ namespace MagicVillaAPI.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<ActionResult<UserResponse>> UpdateUser([FromQuery] Guid id, [FromBody] UserUpdateRequest request)
+        public async Task<ActionResult<UserResponse>> UpdateUser(Guid id, [FromBody] UserUpdateRequest request)
         {
             var user = await _userService.UpdateUserAsync(id, request);
             var response = _mapper.Map<UserResponse>(user);

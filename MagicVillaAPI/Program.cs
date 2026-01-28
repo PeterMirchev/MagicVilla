@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using Asp.Versioning;
 using MagicVillaAPI.Data;
 using MagicVillaAPI.Filters;
@@ -12,6 +13,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(options =>
 {
     options.Filters.Add<GlobalExceptionFilter>();
+})
+.AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 builder.Services.AddScoped<IVillaRepository, VillaRepository>();
 builder.Services.AddScoped<IVillaService, VillaService>();
@@ -21,6 +26,8 @@ builder.Services.AddScoped<IWalletRepository, WalletRepository>();
 builder.Services.AddScoped<IWalletService, WalletService>();
 builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 builder.Services.AddScoped<IReservationService, ReservationService>();
+builder.Services.AddScoped<IAudutRecrdRepository, AuditRecordRepository>();
+builder.Services.AddScoped<IAuditRecordService, AuditRecordSevice>();
 builder.Services.AddAutoMapper(cfg =>
     cfg.AddProfile(new VillaMappingProfile()));
 builder.Services.AddApiVersioning(setupAction =>

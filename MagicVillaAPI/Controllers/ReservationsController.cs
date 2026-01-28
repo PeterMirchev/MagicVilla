@@ -10,7 +10,7 @@ namespace MagicVillaAPI.Controllers
     [ApiController]
     [Route("api/v1/[controller]")]
     [ApiVersion(1)]
-    public class ReservationsController :ControllerBase
+    public class ReservationsController : ControllerBase
     {
         private readonly IReservationService _reservationService;
         private readonly IMapper _mapper;
@@ -42,6 +42,7 @@ namespace MagicVillaAPI.Controllers
 
             return Ok(response);
         }
+
         [HttpGet("user/{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -53,5 +54,14 @@ namespace MagicVillaAPI.Controllers
             return Ok(response);
         }
 
+        [HttpDelete("{reservationId}")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public async Task<ActionResult> DeleteReservationByIdAsync(Guid reservationId)
+        {
+            await _reservationService.DeleteReservationByIdAsync(reservationId);
+
+            return NoContent();
+        }
     }
 }

@@ -4,6 +4,7 @@ using MagicVillaAPI.Models.Dto.Reservation;
 using MagicVillaAPI.Models.Dto.User;
 using MagicVillaAPI.Models.Dto.Villa;
 using MagicVillaAPI.Models.Dto.Wallet;
+using MagicVillaAPI.Utils;
 
 namespace MagicVillaAPI.Mappings;
 
@@ -24,9 +25,10 @@ public class VillaMappingProfile : Profile
         CreateMap<Wallet, WalletResponse>();
 
         CreateMap<ReservationCreateRequest, Reservation>()
-             .ForMember(dest => dest.From, opt => opt.MapFrom(src => src.From.ToDateTime(TimeOnly.MinValue)))
-             .ForMember(dest => dest.To, opt => opt.MapFrom(src => src.To.ToDateTime(TimeOnly.MinValue)));
-        CreateMap<ReservationUpdateRequest, Reservation>();
+            .ForMember(d => d.From, o => o.MapFrom(s => s.From.ToUtcDate()))
+            .ForMember(d => d.To, o => o.MapFrom(s => s.To.ToUtcDate()));
         CreateMap<Reservation, ReservationResponse>();
+
+        CreateMap<object, AuditRecord>();
     }
 }
