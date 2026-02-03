@@ -14,6 +14,8 @@ public class Reservation
     public DateTime To { get; set; }
     
     public decimal Price { get; set; }
+    public bool IsPaid { get; set; }
+    public DateTime DateOfPaimant { get; set; }
 
     [Required]
     public Guid UserId { get; set; }

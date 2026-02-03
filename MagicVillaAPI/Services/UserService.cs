@@ -10,11 +10,16 @@ namespace MagicVillaAPI.Services
         private readonly IUserRepository _userRepository;
         private readonly IAuditRecordService _auditRecordService;
         private readonly IMapper _mapper;
-        public UserService(IUserRepository userRepository, IAuditRecordService auditRecordService, IMapper mapper)
+        private readonly ILogger<UserService> _logger;
+        public UserService(IUserRepository userRepository, 
+            IAuditRecordService auditRecordService, 
+            IMapper mapper, 
+            ILogger<UserService> logger)
         {
             _userRepository = userRepository;
             _auditRecordService = auditRecordService;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task<User> CreateUserAsync(UserCreateRequest request)
@@ -28,6 +33,8 @@ namespace MagicVillaAPI.Services
 
             string Details = "User successfully registered.";
             await _auditRecordService.CreateAsync(user, ActionType.USER_REGISTRATION, user.Id, DateTime.UtcNow, Details);
+
+            _logger.LogInformation("User created. UserId={ReservationId}", user.Id);
 
             return user;
         }
@@ -64,7 +71,7 @@ namespace MagicVillaAPI.Services
         public async Task<User> EnableDisableUserAsync(Guid id, EnableDisableUserRequest request)
         {
             User user = await GetUserByIdAsync(id);
-            user.IsActive = request.elabled;
+            user.IsActive = request.EnableDisable;
             user.UpdatedOn = DateTime.UtcNow;
             await _userRepository.UpdateAsync(user);
 

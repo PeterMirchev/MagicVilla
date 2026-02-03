@@ -21,6 +21,9 @@ namespace MagicVillaAPI.Models
 
         public User User { get; set; }
 
+        [Timestamp]
+        public byte[] RowVersion { get; set; }
+
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
     }

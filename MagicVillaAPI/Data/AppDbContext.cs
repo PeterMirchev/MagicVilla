@@ -38,5 +38,4 @@ public class AppDbContext : DbContext
     public DbSet<Wallet> Wallets { get; set; }
     public DbSet<Reservation> Reservations { get; set; }
     public DbSet<AuditRecord> AuditRecords { get; set; }
-    
 }

@@ -2,6 +2,6 @@
 {
     public class EnableDisableUserRequest
     {
-        public bool elabled { get; set; }
+        public bool EnableDisable { get; set; }
     }
 }

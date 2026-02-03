@@ -29,7 +29,7 @@ builder.Services.AddScoped<IReservationService, ReservationService>();
 builder.Services.AddScoped<IAudutRecrdRepository, AuditRecordRepository>();
 builder.Services.AddScoped<IAuditRecordService, AuditRecordSevice>();
 builder.Services.AddAutoMapper(cfg =>
-    cfg.AddProfile(new VillaMappingProfile()));
+    cfg.AddProfile(new MappingProfile()));
 builder.Services.AddApiVersioning(setupAction =>
 {
     setupAction.ReportApiVersions = true;

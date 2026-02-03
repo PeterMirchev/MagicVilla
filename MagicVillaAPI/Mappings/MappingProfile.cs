@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿
+using AutoMapper;
 using MagicVillaAPI.Models;
 using MagicVillaAPI.Models.Dto.Reservation;
 using MagicVillaAPI.Models.Dto.User;
@@ -8,9 +9,9 @@ using MagicVillaAPI.Utils;
 
 namespace MagicVillaAPI.Mappings;
 
-public class VillaMappingProfile : Profile
+public class MappingProfile : Profile
 {
-    public VillaMappingProfile()
+    public MappingProfile()
     {
         CreateMap<VillaCreateRequest, Villa>();
         CreateMap<VillaUpdateRequest, Villa>();

@@ -7,6 +7,7 @@ namespace MagicVillaAPI.Services
     {
         Task<Reservation> CreateReservationAsync(ReservationCreateRequest request);
         Task<Reservation> UpdateReservationAsync(ReservationUpdateRequest request);
+        Task<Reservation> PayReservationAsync(ReservationPayRequest request);
         Task<IEnumerable<Reservation>> GetAllReservationsByUserIdAsync(Guid userId);
         Task<Reservation> GetReservationByIdAsync(Guid reservationId);
         Task DeleteReservationByIdAsync(Guid reservationId);
