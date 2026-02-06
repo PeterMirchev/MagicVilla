@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MagicVillaAPI.Models;
 using MagicVillaAPI.Models.Dto.Wallet;
 using MagicVillaAPI.Repositories;
@@ -68,7 +63,7 @@ namespace MagicVillaAPI.Test
                 .ReturnsAsync(wallet);
 
             var result = await _walletService.CreateWalletAsync(request);
-            
+
             Assert.NotNull(result);
             Assert.Equal(wallet.Id, result.Id);
 
@@ -176,8 +171,8 @@ namespace MagicVillaAPI.Test
         public async Task UpdateWalletAsync_ThenHappyPath()
         {
             Guid walletId = Guid.NewGuid();
-            var request = new WalletUpdateRequest { Name = "new name"};
-            var wallet = new Wallet { Id = walletId, Name = "old name"};
+            var request = new WalletUpdateRequest { Name = "new name" };
+            var wallet = new Wallet { Id = walletId, Name = "old name" };
 
             _walletRepoMock
                 .Setup(r => r.GetWalletByIdAsync(walletId))
@@ -228,7 +223,7 @@ namespace MagicVillaAPI.Test
                 .ReturnsAsync(wallet);
 
             await Assert.ThrowsAsync<InvalidOperationException>
-                (() => _walletService.WithdrawAsync(walletId, amount));
+                            (() => _walletService.WithdrawAsync(walletId, amount));
         }
     }
 }

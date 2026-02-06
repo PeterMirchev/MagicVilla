@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using MagicVillaAPI.Models;
 using MagicVillaAPI.Models.Dto.Villa;
 using MagicVillaAPI.Repositories;
