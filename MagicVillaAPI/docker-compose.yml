@@ -1,7 +1,7 @@
 services:
-  postgres:
+  postgres_villa_db:
     image: postgres:16
-    container_name: config-postgres
+    container_name: postgres-villa-db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
@@ -9,7 +9,20 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata_villa_db:/var/lib/postgresql/data
+
+  postgres_villa_lite:
+    image: postgres:16
+    container_name: postgres-villa-lite
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: villa_lite
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata_villa_lite:/var/lib/postgresql/data
 
 volumes:
-  pgdata:
+  pgdata_villa_db:
+  pgdata_villa_lite:

@@ -1,11 +1,13 @@
 using System.Text.Json.Serialization;
 using Asp.Versioning;
+using MagicVillaAPI;
 using MagicVillaAPI.Data;
 using MagicVillaAPI.Filters;
 using MagicVillaAPI.Mappings;
 using MagicVillaAPI.Repositories;
 using MagicVillaAPI.Services;
 using Microsoft.EntityFrameworkCore;
+using ServiceStack;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -66,5 +68,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+
+// Initialize ServiceStack
+app.UseServiceStack(new AppHost());
 
 app.Run();
