@@ -9,6 +9,8 @@ using MagicVillaAPI.Services;
 using Microsoft.EntityFrameworkCore;
 using ServiceStack;
 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

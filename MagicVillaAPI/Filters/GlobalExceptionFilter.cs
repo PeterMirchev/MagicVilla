@@ -28,7 +28,6 @@ public class GlobalExceptionFilter : IExceptionFilter
             case ArgumentException:
                 statusCode = (int)HttpStatusCode.BadRequest;
                 break;
-
             default:
                 statusCode = (int)HttpStatusCode.InternalServerError;
                 break;

@@ -21,13 +21,6 @@ namespace MagicVillaAPI.ServiceStack.ServiceStack.User.Repository
             return user;
         }
 
-        public async Task<bool> DeleteAsync(Guid id)
-        {
-            using var db = _dbFactory.Open();
-            var rows = await db.DeleteAsync<UserLite>(x => x.Id == id);
-            return rows > 0;
-        }
-
         public async Task<List<UserLite>> GetAllAsync()
         {
             using var db = _dbFactory.Open();
@@ -51,6 +44,13 @@ namespace MagicVillaAPI.ServiceStack.ServiceStack.User.Repository
             using var db = _dbFactory.Open();
             await db.UpdateAsync(user);
             return user;
+        }
+
+        public async Task<bool> DeleteAsync(Guid id)
+        {
+            using var db = _dbFactory.Open();
+            var rows = await db.DeleteAsync<UserLite>(x => x.Id == id);
+            return rows > 0;
         }
     }
 }
